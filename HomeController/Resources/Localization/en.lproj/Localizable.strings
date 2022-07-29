@@ -1,0 +1,28 @@
+/* 
+  Localizable.strings
+  HomeController
+
+  Created by Sergey Bohachenko on 26.07.2022.
+  
+*/
+"HomePage.Title" = "Your devices";
+"Temperature.Word" = "Temperature";
+"Intensity.Word" = "Intensity";
+"Position.Word" = "Position";
+"On.Word" = "On";
+"Off.Word" = "Off";
+"Mode.Word" = "Mode";
+"Open.Word" = "Open";
+"OpenAt.Word" = "Opened at";
+"Closed.Word" = "Closed";
+"Lampe - Cuisine" = "Lamp - Kitchen";
+"Volet roulant - Salon" = "Roller shutter - Living room";
+"Radiateur - Chambre" = "Radiator - Bedroom";
+"Lampe - Salon" = "Lamp - Living Room";
+"Volet roulant" = "Roller shutter";
+"Radiateur - Salon" = "Radiator - Living room";
+"Lampe - Grenier" = "Lamp - Attic";
+"Volet roulant - Salle de bain" = "Roller shutter - Bathroom";
+"Radiateur - Salle de bain" = "Radiator - Bathroom";
+"Lampe - Salle de bain" = "Lamp - Bathroom";
+"Radiateur - WC" = "Radiator - WC";

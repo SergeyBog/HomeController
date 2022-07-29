@@ -35,7 +35,7 @@ class HeaterControlPageViewController: UIViewController {
         heaterControlPageViewModel?.updateInfo()
     }
     
-    func setUpUI() {
+    private func setUpUI() {
         stylizeElements()
         view.addSubview(heaterImageView)
         view.addSubview(segmentControl)
@@ -45,8 +45,8 @@ class HeaterControlPageViewController: UIViewController {
         addConstraints()
     }
     
-    func stylizeElements() {
-        self.title = heaterControlPageViewModel?.selectedDevice.deviceName
+    private func stylizeElements() {
+        self.title = heaterControlPageViewModel?.selectedDevice.deviceName.localized()
         view.backgroundColor = .lightGray
         
         
@@ -75,7 +75,7 @@ class HeaterControlPageViewController: UIViewController {
                 
     }
     
-    func addConstraints() {
+    private func addConstraints() {
         addConstraintsForHeaterImageView()
         addConstraintsForTemperatureTextView()
         addConstraintsForTemperatureSlider()
@@ -83,7 +83,7 @@ class HeaterControlPageViewController: UIViewController {
         addConstraintsForSegmentControl()
     }
     
-    func addConstraintsForHeaterImageView() {
+    private func addConstraintsForHeaterImageView() {
         
         heaterImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
@@ -94,7 +94,7 @@ class HeaterControlPageViewController: UIViewController {
         heaterImageView.heightAnchor.constraint(equalToConstant: 100).isActive = true
     }
     
-    func addConstraintsForTemperatureTextView() {
+    private func addConstraintsForTemperatureTextView() {
         
         temperatureTextView.topAnchor.constraint(equalTo: heaterImageView.bottomAnchor,constant: 38).isActive = true
         
@@ -104,7 +104,7 @@ class HeaterControlPageViewController: UIViewController {
         
     }
     
-    func addConstraintsForTemperatureSlider() {
+    private func addConstraintsForTemperatureSlider() {
         
         temperatureSlider.topAnchor.constraint(equalTo: temperatureTextView.bottomAnchor,constant: 16).isActive = true
         
@@ -113,7 +113,7 @@ class HeaterControlPageViewController: UIViewController {
         temperatureSlider.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -30).isActive = true
     }
     
-    func addConstraintsForModeTextView() {
+    private func addConstraintsForModeTextView() {
         
         modeTextView.topAnchor.constraint(equalTo: temperatureSlider.bottomAnchor, constant: 38).isActive = true
         
@@ -124,7 +124,7 @@ class HeaterControlPageViewController: UIViewController {
         modeTextView.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -30).isActive = true
     }
     
-    func addConstraintsForSegmentControl() {
+    private func addConstraintsForSegmentControl() {
         
         segmentControl.topAnchor.constraint(equalTo: modeTextView.bottomAnchor, constant: 16).isActive = true
         

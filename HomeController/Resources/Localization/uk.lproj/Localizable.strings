@@ -1,0 +1,28 @@
+/* 
+  Localizable.strings
+  HomeController
+
+  Created by Sergey Bohachenko on 26.07.2022.
+  
+*/
+"HomePage.Title" = "Ваші девайси";
+"Temperature.Word" = "Температура";
+"Intensity.Word" = "Яскравість";
+"Position.Word" = "Позиція";
+"On.Word" = "Включений";
+"Off.Word" = "Виключений";
+"Mode.Word" = "Режим";
+"Open.Word" = "Відкритий";
+"OpenAt.Word" = "Відкритий на";
+"Closed.Word" = "Зачинений";
+"Lampe - Cuisine" = "Лампа - кухня";
+"Volet roulant - Salon" = "Ролети - Вітальня";
+"Radiateur - Chambre" = "Радіатор - Спальня";
+"Lampe - Salon" = "Лампа - Вітальня";
+"Volet roulant" = "Ролети";
+"Radiateur - Salon" = "Радіатор - Вітальня";
+"Lampe - Grenier" = "Лампа - горище";
+"Volet roulant - Salle de bain" = "Ролети - Ванна";
+"Radiateur - Salle de bain" = "Радіатор - Ванна";
+"Lampe - Salle de bain" = "Лампа - Ванна";
+"Radiateur - WC" = "Радіатор - туалет";

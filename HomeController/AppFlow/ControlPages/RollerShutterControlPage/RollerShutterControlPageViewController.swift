@@ -27,7 +27,7 @@ class RollerShutterControlPageViewController: UIViewController {
     }
     
 
-    func setUpUI() {
+    private func setUpUI() {
         stylizeElements()
         view.addSubview(rollerShutterImageView)
         view.addSubview(positionSlider)
@@ -35,8 +35,8 @@ class RollerShutterControlPageViewController: UIViewController {
         addConstraints()
     }
     
-    func stylizeElements() {
-        self.title = rollerShutterControlPageViewModel?.selectedDevice.deviceName
+    private func stylizeElements() {
+        self.title = rollerShutterControlPageViewModel?.selectedDevice.deviceName.localized()
         view.backgroundColor = .lightGray
         
         positionSlider.addTarget(self, action: #selector(sliderValueChanged(_slider:)), for: .valueChanged)
@@ -51,14 +51,14 @@ class RollerShutterControlPageViewController: UIViewController {
                 
     }
     
-    func addConstraints() {
+    private func addConstraints() {
         addConstraintsForRollerShutterImageView()
         addConstraintsForPositionTextView()
         addConstraintsForPositionSlider()
       
     }
     
-    func addConstraintsForRollerShutterImageView() {
+    private func addConstraintsForRollerShutterImageView() {
         
         rollerShutterImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
@@ -69,7 +69,7 @@ class RollerShutterControlPageViewController: UIViewController {
         rollerShutterImageView.heightAnchor.constraint(equalToConstant: 100).isActive = true
     }
     
-    func addConstraintsForPositionTextView() {
+    private func addConstraintsForPositionTextView() {
         
         positionTextView.topAnchor.constraint(equalTo: rollerShutterImageView.bottomAnchor,constant: 38).isActive = true
         
@@ -79,7 +79,7 @@ class RollerShutterControlPageViewController: UIViewController {
         
     }
     
-    func addConstraintsForPositionSlider() {
+    private func addConstraintsForPositionSlider() {
         
         positionSlider.topAnchor.constraint(equalTo: positionTextView.bottomAnchor,constant: 16).isActive = true
         

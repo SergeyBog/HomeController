@@ -91,8 +91,6 @@
 		B18B2E0328897ECC0030F947 = {
 			isa = PBXGroup;
 			children = (
-				B1E7DA8E2890086900848CA9 /* DeviceDbModel+CoreDataClass.swift */,
-				B1E7DA8F2890086900848CA9 /* DeviceDbModel+CoreDataProperties.swift */,
 				B18B2E0E28897ECC0030F947 /* HomeController */,
 				B18B2E0D28897ECC0030F947 /* Products */,
 			);
@@ -234,6 +232,8 @@
 			isa = PBXGroup;
 			children = (
 				B18B2E7C288D4C0E0030F947 /* HomeController.xcdatamodeld */,
+				B1E7DA8E2890086900848CA9 /* DeviceDbModel+CoreDataClass.swift */,
+				B1E7DA8F2890086900848CA9 /* DeviceDbModel+CoreDataProperties.swift */,
 			);
 			path = Database;
 			sourceTree = "<group>";

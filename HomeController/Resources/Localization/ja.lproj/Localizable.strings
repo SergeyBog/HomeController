@@ -1,0 +1,29 @@
+/* 
+  Localizable.strings
+  HomeController
+
+  Created by Sergey Bohachenko on 26.07.2022.
+  
+*/
+"HomePage.Title" = "お使いのデバイス";
+"Temperature.Word" = "温度";
+"Intensity.Word" = "強度";
+"Position.Word" = "位置";
+"On.Word" = "オン";
+"Off.Word" = "オフ";
+"Mode.Word" = "モード";
+"Open.Word" = "開く";
+"OpenAt.Word" = "で開かれました";
+"Closed.Word" = "クローズ";
+"Lampe - Cuisine" = "ランプ - キッチン";
+"Volet roulant - Salon" = "ローラー シャッター - リビング ルーム";
+"Radiateur - Chambre" = "ラジエーター - ベッドルーム";
+"Lampe - Salon" = "ランプ - リビング ルーム";
+"Volet roulant" = "ローラーシャッター";
+"Radiateur - Salon" = "ラジエーター - リビング ルーム";
+"Lampe - Grenier" = "ランプ-屋根裏部屋";
+"Volet roulant - Salle de bain" = "ローラー シャッター - バスルーム";
+"Radiateur - Salle de bain" = "ラジエーター - バスルーム";
+"Lampe - Salle de bain" = "ランプ - バスルーム";
+"Radiateur - WC" = "ラジエーター - トイレ";
+

@@ -13,7 +13,10 @@ class HomePageTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        SetupUI()
+    }
+    
+    private func SetupUI() {
         tableView.register(DeviceTableViewCell.self, forCellReuseIdentifier:DeviceTableViewCell.identifier)
         configureViewModel()
         
@@ -23,17 +26,11 @@ class HomePageTableViewController: UITableViewController {
         
         homePageViewModel?.getDevices()
         
-        ///fix this userdefaults??
-        /* let contentOffset = tableView.contentOffset
-         tableView.reloadData()
-         tableView.layoutIfNeeded()
-         tableView.setContentOffset(contentOffset, animated: false)*/
         if homePageViewModel?.needToUpdateData == true {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
         }
-        
     }
     
     private func configureViewModel() {

@@ -47,7 +47,7 @@ class DeviceTableViewCell: UITableViewCell {
         
         if model.productType == "RollerShutter" {
             
-            deviceNameLabel.text = model.deviceName
+            deviceNameLabel.text = model.deviceName.localized()
             
             if model.mode == "OpenAt.Word".localized() || model.position ?? 0 > 0 {
                 deviceFirstActivityLabel.text = "OpenAt.Word".localized() + ": " + String(model.position ?? 0) + "%"
@@ -62,7 +62,7 @@ class DeviceTableViewCell: UITableViewCell {
             
             
         } else if model.productType == "Light" {
-            deviceNameLabel.text = model.deviceName
+            deviceNameLabel.text = model.deviceName.localized()
             
             if model.mode == "Off.Word".localized() || model.mode == "OFF" {
                 deviceFirstActivityLabel.text = "Off.Word".localized()
@@ -71,7 +71,7 @@ class DeviceTableViewCell: UITableViewCell {
             }
             
         } else {
-            deviceNameLabel.text = model.deviceName
+            deviceNameLabel.text = model.deviceName.localized()
             if model.mode == "Off.Word".localized() || model.mode == "OFF" {
                 deviceFirstActivityLabel.text = "Off.Word".localized()
             } else {

@@ -35,7 +35,7 @@ class LightControlPageViewController: UIViewController {
         lightControlPageViewModel?.updateInfo()
     }
     
-    func setUpUI() {
+    private func setUpUI() {
         stylizeElements()
         view.addSubview(lightImageView)
         view.addSubview(segmentControl)
@@ -45,8 +45,8 @@ class LightControlPageViewController: UIViewController {
         addConstraints()
     }
     
-    func stylizeElements() {
-        self.title = lightControlPageViewModel?.selectedDevice.deviceName
+    private func stylizeElements() {
+        self.title = lightControlPageViewModel?.selectedDevice.deviceName.localized()
         view.backgroundColor = .lightGray
         
         segmentControl.addTarget(self, action: #selector(segmentControlChange(_segmentControl:)), for: .valueChanged)
@@ -72,7 +72,7 @@ class LightControlPageViewController: UIViewController {
                 
     }
     
-    func addConstraints() {
+    private func addConstraints() {
         addConstraintsForLightImageView()
         addConstraintsForIntensityTextView()
         addConstraintsForIntensitySlider()
@@ -80,7 +80,7 @@ class LightControlPageViewController: UIViewController {
         addConstraintsForSegmentControl()
     }
     
-    func addConstraintsForLightImageView() {
+    private func addConstraintsForLightImageView() {
         
         lightImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
@@ -91,7 +91,7 @@ class LightControlPageViewController: UIViewController {
         lightImageView.heightAnchor.constraint(equalToConstant: 100).isActive = true
     }
     
-    func addConstraintsForIntensityTextView() {
+    private func addConstraintsForIntensityTextView() {
         
         intensityTextView.topAnchor.constraint(equalTo: lightImageView.bottomAnchor,constant: 38).isActive = true
         
@@ -101,7 +101,7 @@ class LightControlPageViewController: UIViewController {
         
     }
     
-    func addConstraintsForIntensitySlider() {
+   private func addConstraintsForIntensitySlider() {
         
         intensitySlider.topAnchor.constraint(equalTo: intensityTextView.bottomAnchor,constant: 16).isActive = true
         
@@ -110,7 +110,7 @@ class LightControlPageViewController: UIViewController {
         intensitySlider.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -30).isActive = true
     }
     
-    func addConstraintsForModeTextView() {
+    private func addConstraintsForModeTextView() {
         
         modeTextView.topAnchor.constraint(equalTo: intensitySlider.bottomAnchor, constant: 38).isActive = true
         
@@ -121,7 +121,7 @@ class LightControlPageViewController: UIViewController {
         modeTextView.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -30).isActive = true
     }
     
-    func addConstraintsForSegmentControl() {
+    private func addConstraintsForSegmentControl() {
         
         segmentControl.topAnchor.constraint(equalTo: modeTextView.bottomAnchor, constant: 16).isActive = true
         
