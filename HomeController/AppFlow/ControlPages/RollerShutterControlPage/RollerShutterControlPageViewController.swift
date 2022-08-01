@@ -8,7 +8,7 @@
 import UIKit
 
 class RollerShutterControlPageViewController: UIViewController {
-    var rollerShutterControlPageViewModel: RollerShutterControlPageViewModel?
+    var rollerShutterControlPageViewModel: RollerShutterControlPageViewModel
     
     private let rollerShutterImageView = UIImageView()
     
@@ -16,17 +16,24 @@ class RollerShutterControlPageViewController: UIViewController {
     
     private let positionTextView = UITextView()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setUpUI()
+    init(with viewModel: RollerShutterControlPageViewModel) {
+        self.rollerShutterControlPageViewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
     
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     deinit {
-        rollerShutterControlPageViewModel?.updateInfo()
+        rollerShutterControlPageViewModel.updateInfo()
     }
     
-
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setUpUI()
+    }
+    
     private func setUpUI() {
         stylizeElements()
         view.addSubview(rollerShutterImageView)
@@ -36,7 +43,7 @@ class RollerShutterControlPageViewController: UIViewController {
     }
     
     private func stylizeElements() {
-        self.title = rollerShutterControlPageViewModel?.selectedDevice.deviceName.localized()
+        self.title = rollerShutterControlPageViewModel.selectedDevice.deviceName.localized()
         view.backgroundColor = .lightGray
         
         positionSlider.addTarget(self, action: #selector(sliderValueChanged(_slider:)), for: .valueChanged)
@@ -45,9 +52,9 @@ class RollerShutterControlPageViewController: UIViewController {
         positionSlider.styleSlider()
         positionTextView.styleTextView(texts: "Position.Word".localized() + ": ")
         
-        positionSlider.value =  Float(rollerShutterControlPageViewModel?.selectedDevice.position ?? 0)/100
+        positionSlider.value =  Float(rollerShutterControlPageViewModel.selectedDevice.position)/100
         
-        positionTextView.text = "Position.Word".localized() + ": " + String(Int( rollerShutterControlPageViewModel?.selectedDevice.position ?? 0))
+        positionTextView.text = "Position.Word".localized() + ": " + String(Int( rollerShutterControlPageViewModel.selectedDevice.position))
                 
     }
     
@@ -93,18 +100,7 @@ class RollerShutterControlPageViewController: UIViewController {
         positionTextView.text = "Position.Word".localized() + ": " + String(Int( (_slider.value * 100).rounded(.up)))
         let value = (_slider.value * 100).rounded(.up)
         
-        if value == 0 {
-            rollerShutterControlPageViewModel?.selectedDevice.mode = "Open.Word".localized()
-        } else if value > 0 && value < 100  {
-            rollerShutterControlPageViewModel?.selectedDevice.mode = "OpenAt.Word".localized()
-        } else {
-            rollerShutterControlPageViewModel?.selectedDevice.mode = "Closed.Word".localized()
-        }
-        
-        rollerShutterControlPageViewModel?.selectedDevice.position = Int(value)
-        
-        rollerShutterControlPageViewModel?.updateDevice()
-       
+        rollerShutterControlPageViewModel.updateData(with: value)
     }
 
 }

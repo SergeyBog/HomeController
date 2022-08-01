@@ -20,64 +20,32 @@ final class MainCoordinator {
     }
     
     func startHomePage() {
-        let databaseManager = DatabaseManager()
-        if databaseManager.GetAllDevices().count == 0 {
-            homePageCoordinator = HomePageCoordinator(navigationController: rootNav, transitions: self)
-            homePageCoordinator?.start(getDataFromApi: true, updateData: false
-            )
-            window.rootViewController = rootNav
-            window.makeKeyAndVisible()
-        }
-        else {
-            homePageCoordinator = HomePageCoordinator(navigationController: rootNav, transitions: self)
-            homePageCoordinator?.start(getDataFromApi: false, updateData: false)
-            window.rootViewController = rootNav
-            window.makeKeyAndVisible()
-        }
-    }
-    
-    func startUpdatedHomePage() {
         homePageCoordinator = nil
         homePageCoordinator = HomePageCoordinator(navigationController: rootNav, transitions: self)
-        homePageCoordinator?.start(getDataFromApi: false, updateData: true)
+        homePageCoordinator?.start()
         window.rootViewController = rootNav
         window.makeKeyAndVisible()
     }
     
-    func startLightControlPage(with device: Device) {
+    func startLightControlPage(deviceId: Int) {
         
         let lightControlPageCoordinator = LightControlPageCoordinator(navigationController: rootNav, transitions: self)
-        
-       let lightDevice = Light(id: device.id, deviceName: device.deviceName, intensity: device.intensity ?? 0, mode: device.mode ?? "OFF")
-        
 
-        lightControlPageCoordinator.start(with: lightDevice)
+        lightControlPageCoordinator.start(with: deviceId)
     }
     
-    func startHeaterControlPage(with device: Device) {
+    func startHeaterControlPage(deviceId: Int) {
         
         let heaterControlPageCoordinator = HeaterControlPageCoordinator(navigationController: rootNav, transitions: self)
         
-        let heaterDevice = Heater(id: device.id, deviceName: device.deviceName, mode: device.mode ?? "Off", temperature: Float(device.temperature ?? 0))
-        
-        heaterControlPageCoordinator.start(with: heaterDevice)
+        heaterControlPageCoordinator.start(with: deviceId)
     }
     
-    func startRollerShutterControlPage(with device: Device) {
+    func startRollerShutterControlPage(deviceId: Int) {
         
         let rollerShutterControlPageCoordinator = RollerShutterControlPageCoordinator(navigationController: rootNav, transitions: self)
-        
-        var deviceMode = String()
-        
-        if device.position == 0 {
-            deviceMode = "Off"
-        } else {
-            deviceMode = "On"
-        }
-        
-        let rollerShutterDevice = RollerShutter(id: device.id, deviceName: device.deviceName, position: device.position ?? 0, mode: deviceMode)
-        
-        rollerShutterControlPageCoordinator.start(with: rollerShutterDevice)
+    
+        rollerShutterControlPageCoordinator.start(with: deviceId)
     }
     
    
@@ -86,27 +54,27 @@ final class MainCoordinator {
 extension MainCoordinator: HomePageCoordinatorTransitions, LightControlPageCoordinatorTransitions, HeaterControlPageCoordinatorTransitions, RollerShutterControlPageCoordinatorTransitions {
     
     func updateInfoLight() {
-        startUpdatedHomePage()
+        startHomePage()
     }
     
     func updateInfoHeater() {
-        startUpdatedHomePage()
+        startHomePage()
     }
     
     func updateInfoRollerShutter() {
-       startUpdatedHomePage()
+       startHomePage()
     }
 
     func seeDevicesDetails(with device: Device) {
         
         if device.productType == "Light" {
-            startLightControlPage(with: device)
+            startLightControlPage(deviceId: device.id)
         }
         else if device.productType == "Heater" {
-            startHeaterControlPage(with: device)
+            startHeaterControlPage(deviceId: device.id)
         }
         else {
-            startRollerShutterControlPage(with: device)
+            startRollerShutterControlPage(deviceId: device.id)
         }
         
     }

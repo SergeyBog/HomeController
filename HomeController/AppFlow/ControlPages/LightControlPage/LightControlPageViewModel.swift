@@ -11,7 +11,6 @@ final class LightControlPageViewModel {
     
     var selectedDevice: Light
     var coordinator: LightControlPageCoordinator?
-    var reloadImageView: (() -> ())?
     
     init(with device: Light) {
         self.selectedDevice = device
@@ -21,10 +20,19 @@ final class LightControlPageViewModel {
         coordinator?.updateInfo()
     }
     
+    func updateMode(with mode: String) {
+        selectedDevice.mode = mode
+        updateDevice()
+    }
+    
+    func updateIntensity(with value: Int) {
+        selectedDevice.intensity = value
+        updateDevice()
+    }
+    
     func updateDevice() {
         let databaseManager = DatabaseManager()
-        let device = Device(id: selectedDevice.id, deviceName: selectedDevice.deviceName, intensity: selectedDevice.intensity, position: nil, mode: selectedDevice.mode, temperature: nil, productType: "Light")
-        databaseManager.updateDevice(deviceToUpdate: device)
+        databaseManager.updateLightDevice(deviceToUpdate: selectedDevice)
     }
 }
 

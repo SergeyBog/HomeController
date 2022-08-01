@@ -49,8 +49,8 @@ class DeviceTableViewCell: UITableViewCell {
             
             deviceNameLabel.text = model.deviceName.localized()
             
-            if model.mode == "OpenAt.Word".localized() || model.position ?? 0 > 0 {
-                deviceFirstActivityLabel.text = "OpenAt.Word".localized() + ": " + String(model.position ?? 0) + "%"
+            if model.mode == "ClosedOn.Word".localized() || model.position ?? 0 > 0 &&  model.position ?? 0 < 100 {
+                deviceFirstActivityLabel.text = "ClosedOn.Word".localized() + ": " + String(model.position ?? 0) + "%"
                 
             } else if model.mode == "Open.Word".localized() || model.position ?? 0 == 0 {
                 deviceFirstActivityLabel.text = "Open.Word".localized()
@@ -59,9 +59,8 @@ class DeviceTableViewCell: UITableViewCell {
                 deviceFirstActivityLabel.text = "Closed.Word".localized()
             }
             
-            
-            
         } else if model.productType == "Light" {
+            
             deviceNameLabel.text = model.deviceName.localized()
             
             if model.mode == "Off.Word".localized() || model.mode == "OFF" {

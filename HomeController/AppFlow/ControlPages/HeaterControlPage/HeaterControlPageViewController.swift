@@ -9,7 +9,7 @@ import UIKit
 
 class HeaterControlPageViewController: UIViewController {
 
-    var heaterControlPageViewModel: HeaterControlPageViewModel?
+    var heaterControlPageViewModel: HeaterControlPageViewModel
     
     private let heaterImageView = UIImageView()
     
@@ -26,13 +26,22 @@ class HeaterControlPageViewController: UIViewController {
         return segControl
     }()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setUpUI()
+    init(with viewModel: HeaterControlPageViewModel) {
+        self.heaterControlPageViewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     deinit {
-        heaterControlPageViewModel?.updateInfo()
+        heaterControlPageViewModel.updateInfo()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setUpUI()
     }
     
     private func setUpUI() {
@@ -46,7 +55,7 @@ class HeaterControlPageViewController: UIViewController {
     }
     
     private func stylizeElements() {
-        self.title = heaterControlPageViewModel?.selectedDevice.deviceName.localized()
+        self.title = heaterControlPageViewModel.selectedDevice.deviceName.localized()
         view.backgroundColor = .lightGray
         
         
@@ -55,7 +64,7 @@ class HeaterControlPageViewController: UIViewController {
         temperatureSlider.addTarget(self, action: #selector(sliderValueChanged(_slider:)), for: .valueChanged)
         
         
-        if heaterControlPageViewModel?.selectedDevice.mode == "On.Word".localized() || heaterControlPageViewModel?.selectedDevice.mode == "ON"{
+        if heaterControlPageViewModel.selectedDevice.mode == "On.Word".localized() || heaterControlPageViewModel.selectedDevice.mode == "ON"{
             segmentControl.selectedSegmentIndex = 0
             heaterImageView.image = UIImage(named: "DeviceHeaterOnIcon")
         } else {
@@ -68,10 +77,10 @@ class HeaterControlPageViewController: UIViewController {
         modeTextView.styleTextView(texts: "Mode.Word".localized() + ": ")
         temperatureTextView.styleTextView(texts: "Temperature.Word".localized() + ": ")
         temperatureSlider.minimumValue = 7.0/100
-        temperatureSlider.maximumValue = 27.0/100
-        temperatureSlider.value =  Float(heaterControlPageViewModel?.selectedDevice.temperature ?? 0)/100
+        temperatureSlider.maximumValue = 28.0/100
+        temperatureSlider.value =  Float(heaterControlPageViewModel.selectedDevice.temperature)/100
         
-        temperatureTextView.text = "Temperature.Word".localized() + ": " +  String(heaterControlPageViewModel?.selectedDevice.temperature ?? 0) + "°"
+        temperatureTextView.text = "Temperature.Word".localized() + ": " +  String(heaterControlPageViewModel.selectedDevice.temperature) + "°"
                 
     }
     
@@ -139,17 +148,14 @@ class HeaterControlPageViewController: UIViewController {
         switch segmentControl.selectedSegmentIndex {
         case 0:
             heaterImageView.image = UIImage(named: "DeviceHeaterOnIcon")
-            heaterControlPageViewModel?.selectedDevice.mode = "On.Word".localized()
-            heaterControlPageViewModel?.updateDevice()
+            heaterControlPageViewModel.updateMode(with: "On.Word".localized())
             
         case 1:
             heaterImageView.image = UIImage(named: "DeviceHeaterOffIcon")
-            heaterControlPageViewModel?.selectedDevice.mode = "Off.Word".localized()
-            heaterControlPageViewModel?.updateDevice()
+            heaterControlPageViewModel.updateMode(with: "Off.Word".localized())
             
         default:
             heaterImageView.image = UIImage(named: "DeviceHeaterOffIcon")
-            
         }
     }
     
@@ -157,9 +163,7 @@ class HeaterControlPageViewController: UIViewController {
         
         temperatureTextView.text = "Temperature.Word".localized() + ": " + String(round(_slider.value * 100 * 2)/2) + "°"
         
-        heaterControlPageViewModel?.selectedDevice.temperature = Float(round(_slider.value * 100 * 2)/2)
-        heaterControlPageViewModel?.updateDevice()
-       
+        heaterControlPageViewModel.updateTemperature(with: Float(round(_slider.value * 100 * 2)/2))
     }
     
    

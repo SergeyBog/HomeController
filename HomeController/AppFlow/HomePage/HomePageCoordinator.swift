@@ -21,11 +21,10 @@ final class HomePageCoordinator {
         self.transitions = transitions
     }
     
-    func start(getDataFromApi: Bool, updateData: Bool) {
-        let homePageTableViewController = HomePageTableViewController()
-        let homePageViewModel = HomePageViewModel(getDataFromApi: getDataFromApi, updateData: updateData)
+    func start() {
+        let homePageViewModel = HomePageViewModel()
         homePageViewModel.coordinator = self
-        homePageTableViewController.homePageViewModel = homePageViewModel
+        let homePageTableViewController = HomePageTableViewController(with: homePageViewModel)
         navigationController.setViewControllers([homePageTableViewController], animated: false)
     }
     

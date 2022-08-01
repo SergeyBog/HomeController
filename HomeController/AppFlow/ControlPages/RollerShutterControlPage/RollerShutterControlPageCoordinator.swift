@@ -22,11 +22,14 @@ final class RollerShutterControlPageCoordinator {
         self.transitions = transitions
     }
     
-    func start(with device: RollerShutter) {
-        let rollerShutterControlPageViewController = RollerShutterControlPageViewController()
-        let rollerShutterControlPageViewModel = RollerShutterControlPageViewModel(with: device)
+    func start(with deviceId: Int) {
+
+        let databaseManager = DatabaseManager()
+        let rollerShutterControlPageViewModel = RollerShutterControlPageViewModel(with: databaseManager.getRollershutterDevice(with: deviceId))
+        
         rollerShutterControlPageViewModel.coordinator = self
-        rollerShutterControlPageViewController.rollerShutterControlPageViewModel = rollerShutterControlPageViewModel
+        
+        let rollerShutterControlPageViewController = RollerShutterControlPageViewController(with: rollerShutterControlPageViewModel)
         navigationController.pushViewController(rollerShutterControlPageViewController, animated: true)
     }
     

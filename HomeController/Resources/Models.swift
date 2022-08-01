@@ -54,6 +54,6 @@ struct RollerShutter {
 struct Heater {
     var id: Int
     var deviceName: String
-    var mode: String
     var temperature: Float
+    var mode: String
 }

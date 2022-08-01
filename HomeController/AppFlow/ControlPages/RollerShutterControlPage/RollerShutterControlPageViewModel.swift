@@ -11,7 +11,6 @@ final class RollerShutterControlPageViewModel {
     
     var selectedDevice: RollerShutter
     var coordinator: RollerShutterControlPageCoordinator?
-    var reloadImageView: (() -> ())?
     
     init(with device: RollerShutter) {
         self.selectedDevice = device
@@ -21,10 +20,28 @@ final class RollerShutterControlPageViewModel {
         coordinator?.updateInfo()
     }
     
+    func updateData(with value: Float) {
+        
+        if value == 0 {
+            selectedDevice.mode = "Open.Word".localized()
+            selectedDevice.position = Int(value)
+            updateDevice()
+            
+        } else if value > 0 && value < 100  {
+            selectedDevice.mode =  "OpenAt.Word".localized()
+            selectedDevice.position = Int(value)
+            updateDevice()
+            
+        } else {
+            selectedDevice.mode =  "Closed.Word".localized()
+            selectedDevice.position = Int(value)
+            updateDevice()
+        }
+    }
+    
     func updateDevice() {
         let databaseManager = DatabaseManager()
-        let device = Device(id: selectedDevice.id, deviceName: selectedDevice.deviceName, intensity: nil, position: selectedDevice.position, mode: selectedDevice.mode, temperature: nil, productType: "RollerShutter")
-        databaseManager.updateDevice(deviceToUpdate: device)
+        databaseManager.updateRollershutterDevice(deviceToUpdate: selectedDevice)
     }
     
 }

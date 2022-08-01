@@ -9,7 +9,7 @@ import UIKit
 
 class LightControlPageViewController: UIViewController {
 
-    var lightControlPageViewModel: LightControlPageViewModel?
+    var lightControlPageViewModel: LightControlPageViewModel
    
     private let lightImageView = UIImageView()
     
@@ -26,13 +26,22 @@ class LightControlPageViewController: UIViewController {
         return segControl
     }()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setUpUI()
+    init(with viewModel: LightControlPageViewModel) {
+        self.lightControlPageViewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     deinit {
-        lightControlPageViewModel?.updateInfo()
+        lightControlPageViewModel.updateInfo()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setUpUI()
     }
     
     private func setUpUI() {
@@ -46,14 +55,14 @@ class LightControlPageViewController: UIViewController {
     }
     
     private func stylizeElements() {
-        self.title = lightControlPageViewModel?.selectedDevice.deviceName.localized()
+        self.title = lightControlPageViewModel.selectedDevice.deviceName.localized()
         view.backgroundColor = .lightGray
         
         segmentControl.addTarget(self, action: #selector(segmentControlChange(_segmentControl:)), for: .valueChanged)
         
         intensitySlider.addTarget(self, action: #selector(sliderValueChanged(_slider:)), for: .valueChanged)
         
-        if lightControlPageViewModel?.selectedDevice.mode == "On.Word".localized() || lightControlPageViewModel?.selectedDevice.mode == "ON" {
+        if lightControlPageViewModel.selectedDevice.mode == "On.Word".localized() || lightControlPageViewModel.selectedDevice.mode == "ON" {
             segmentControl.selectedSegmentIndex = 0
             lightImageView.image = UIImage(named: "DeviceLightOnIcon")
         } else {
@@ -66,9 +75,9 @@ class LightControlPageViewController: UIViewController {
         modeTextView.styleTextView(texts: "Mode.Word".localized() + ": ")
         intensityTextView.styleTextView(texts: "Intensity.Word".localized() + ": ")
         
-        intensitySlider.value =  Float(lightControlPageViewModel?.selectedDevice.intensity ?? 0)/100
+        intensitySlider.value =  Float(lightControlPageViewModel.selectedDevice.intensity)/100
         
-        intensityTextView.text = "Intensity.Word".localized() + ": " + String(lightControlPageViewModel?.selectedDevice.intensity ?? 0)
+        intensityTextView.text = "Intensity.Word".localized() + ": " + String(lightControlPageViewModel.selectedDevice.intensity)
                 
     }
     
@@ -136,13 +145,11 @@ class LightControlPageViewController: UIViewController {
         switch segmentControl.selectedSegmentIndex {
         case 0:
             lightImageView.image = UIImage(named: "DeviceLightOnIcon")
-            lightControlPageViewModel?.selectedDevice.mode = "On.Word".localized()
-            lightControlPageViewModel?.updateDevice()
+            lightControlPageViewModel.updateMode(with: "On.Word".localized())
             
         case 1:
             lightImageView.image = UIImage(named: "DeviceLightOffIcon")
-            lightControlPageViewModel?.selectedDevice.mode = "Off.Word".localized()
-            lightControlPageViewModel?.updateDevice()
+            lightControlPageViewModel.updateMode(with: "Off.Word".localized())
             
         default:
             lightImageView.image = UIImage(named: "DeviceLightOffIcon")
@@ -150,11 +157,9 @@ class LightControlPageViewController: UIViewController {
     }
     
     @objc func sliderValueChanged(_slider: UISlider) {
-        intensityTextView.text = "Intensity.Word".localized() + ": " + String(Int((_slider.value * 100)))
-        lightControlPageViewModel?.selectedDevice.intensity = Int((_slider.value * 100).rounded(.up))
-        lightControlPageViewModel?.updateDevice()
+        intensityTextView.text = "Intensity.Word".localized() + ": " + String(Int((_slider.value * 100).rounded(.up)))
         
+        lightControlPageViewModel.updateIntensity(with: Int((_slider.value * 100).rounded(.up)))
     }
     
-
 }

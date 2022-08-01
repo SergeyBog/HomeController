@@ -11,8 +11,7 @@ final class HeaterControlPageViewModel {
     
     var selectedDevice: Heater
     var coordinator: HeaterControlPageCoordinator?
-    var reloadImageView: (() -> ())?
-    
+
     init(with device: Heater) {
         self.selectedDevice = device
     }
@@ -21,9 +20,18 @@ final class HeaterControlPageViewModel {
         coordinator?.updateInfo()
     }
     
+    func updateMode(with mode: String) {
+        selectedDevice.mode = mode
+        updateDevice()
+    }
+    
+    func updateTemperature(with value: Float) {
+        selectedDevice.temperature = value
+        updateDevice()
+    }
+    
     func updateDevice() {
         let databaseManager = DatabaseManager()
-        let device = Device(id: selectedDevice.id, deviceName: selectedDevice.deviceName, intensity: nil, position: nil, mode: selectedDevice.mode, temperature: selectedDevice.temperature, productType: "Heater")
-        databaseManager.updateDevice(deviceToUpdate: device)
+        databaseManager.updateHeaterDevice(deviceToUpdate: selectedDevice)
     }
 }

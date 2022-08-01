@@ -11,7 +11,7 @@ class NetworkManager {
     
     typealias DeviceResponse = ([Device]?, Error?) -> Void
 
-    func getDevices(completion:@escaping DeviceResponse) {
+    func getDevicesFromServer(completion:@escaping DeviceResponse) {
         
         let decoder = JSONDecoder()
         

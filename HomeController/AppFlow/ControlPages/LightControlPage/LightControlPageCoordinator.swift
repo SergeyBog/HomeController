@@ -22,13 +22,14 @@ final class LightControlPageCoordinator {
         self.transitions = transitions
     }
     
-    func start(with device: Light) {
-        let lightControlPageViewController = LightControlPageViewController()
-        let lightControlPageViewModel = LightControlPageViewModel(with: device)
+    func start(with deviceId: Int) {
+        let databaseManager = DatabaseManager()
+        let lightControlPageViewModel = LightControlPageViewModel(with: databaseManager.getLightDevice(with: deviceId))
         lightControlPageViewModel.coordinator = self
-        lightControlPageViewController.lightControlPageViewModel = lightControlPageViewModel
+        let lightControlPageViewController = LightControlPageViewController(with: lightControlPageViewModel)
         navigationController.pushViewController(lightControlPageViewController, animated: true)
     }
+    
     
     func updateInfo() {
         transitions?.updateInfoLight()

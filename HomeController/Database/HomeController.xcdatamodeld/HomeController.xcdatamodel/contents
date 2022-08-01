@@ -1,15 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21F79" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="DeviceDbModel" representedClassName=".DeviceDbModel" syncable="YES">
+    <entity name="HeaterDbModel" representedClassName=".HeaterDbModel" syncable="YES">
         <attribute name="deviceName" attributeType="String"/>
         <attribute name="id" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="intensity" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="mode" optional="YES" attributeType="String"/>
-        <attribute name="position" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="productType" attributeType="String"/>
-        <attribute name="temperature" optional="YES" attributeType="Float" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="mode" attributeType="String"/>
+        <attribute name="temperature" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="LightDbModel" representedClassName=".LightDbModel" syncable="YES">
+        <attribute name="deviceName" attributeType="String"/>
+        <attribute name="id" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="intensity" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="mode" attributeType="String"/>
+    </entity>
+    <entity name="RollershutterDbModel" representedClassName=".RollershutterDbModel" syncable="YES">
+        <attribute name="deviceName" attributeType="String"/>
+        <attribute name="id" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="mode" attributeType="String"/>
+        <attribute name="position" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
     <elements>
-        <element name="DeviceDbModel" positionX="-63" positionY="-18" width="128" height="134"/>
+        <element name="LightDbModel" positionX="-63" positionY="36" width="128" height="89"/>
+        <element name="HeaterDbModel" positionX="-54" positionY="45" width="128" height="89"/>
+        <element name="RollershutterDbModel" positionX="-36" positionY="63" width="128" height="89"/>
     </elements>
 </model>
