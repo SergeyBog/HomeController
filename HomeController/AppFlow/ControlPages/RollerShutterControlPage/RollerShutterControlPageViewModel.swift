@@ -16,6 +16,18 @@ final class RollerShutterControlPageViewModel {
         self.selectedDevice = device
     }
     
+    func getDeviceName() -> String {
+        return selectedDevice.deviceName.localized()
+    }
+    
+    func getDevicePositionInFloat() -> Float {
+        return Float(selectedDevice.position)
+    }
+    
+    func getDevicePositionInString() -> String {
+        return String(selectedDevice.position)
+    }
+    
     func updateInfo() {
         coordinator?.updateInfo()
     }
@@ -23,17 +35,17 @@ final class RollerShutterControlPageViewModel {
     func updateData(with value: Float) {
         
         if value == 0 {
-            selectedDevice.mode = "Open.Word".localized()
+            selectedDevice.mode = "open.Word".localized()
             selectedDevice.position = Int(value)
             updateDevice()
             
         } else if value > 0 && value < 100  {
-            selectedDevice.mode =  "OpenAt.Word".localized()
+            selectedDevice.mode =  "openAt.Word".localized()
             selectedDevice.position = Int(value)
             updateDevice()
             
         } else {
-            selectedDevice.mode =  "Closed.Word".localized()
+            selectedDevice.mode =  "closed.Word".localized()
             selectedDevice.position = Int(value)
             updateDevice()
         }

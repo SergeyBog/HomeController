@@ -5,17 +5,17 @@
   Created by Sergey Bohachenko on 26.07.2022.
   
 */
-"HomePage.Title" = "お使いのデバイス";
-"Temperature.Word" = "温度";
-"Intensity.Word" = "強度";
-"Position.Word" = "位置";
-"On.Word" = "オン";
-"Off.Word" = "オフ";
-"Mode.Word" = "モード";
-"Open.Word" = "開く";
-"OpenAt.Word" = "で開かれました";
-"Closed.Word" = "クローズ";
-"ClosedOn.Word" = "定休日";
+"homePage.Title" = "お使いのデバイス";
+"temperature.Word" = "温度";
+"intensity.Word" = "強度";
+"position.Word" = "位置";
+"on.Word" = "オン";
+"off.Word" = "オフ";
+"mode.Word" = "モード";
+"open.Word" = "開く";
+"openAt.Word" = "で開かれました";
+"closed.Word" = "クローズ";
+"closedOn.Word" = "定休日";
 "Lampe - Cuisine" = "ランプ - キッチン";
 "Volet roulant - Salon" = "ローラー シャッター - リビング ルーム";
 "Radiateur - Chambre" = "ラジエーター - ベッドルーム";

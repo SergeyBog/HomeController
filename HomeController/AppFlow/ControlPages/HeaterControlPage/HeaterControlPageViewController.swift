@@ -20,7 +20,7 @@ class HeaterControlPageViewController: UIViewController {
     private let modeTextView = UITextView()
     
     private let segmentControl: UISegmentedControl = {
-        let items = ["On.Word".localized(),"Off.Word".localized()]
+        let items = ["on.Word".localized(),"off.Word".localized()]
         let segControl = UISegmentedControl(items: items)
         segControl.translatesAutoresizingMaskIntoConstraints = false
         return segControl
@@ -55,32 +55,38 @@ class HeaterControlPageViewController: UIViewController {
     }
     
     private func stylizeElements() {
-        self.title = heaterControlPageViewModel.selectedDevice.deviceName.localized()
-        view.backgroundColor = .lightGray
+        self.title = heaterControlPageViewModel.getDeviceName()
         
+        view.backgroundColor = .lightGray
         
         segmentControl.addTarget(self, action: #selector(segmentControlChange(_segmentControl:)), for: .valueChanged)
         
         temperatureSlider.addTarget(self, action: #selector(sliderValueChanged(_slider:)), for: .valueChanged)
         
-        
-        if heaterControlPageViewModel.selectedDevice.mode == "On.Word".localized() || heaterControlPageViewModel.selectedDevice.mode == "ON"{
+        if heaterControlPageViewModel.getDeviceMode() == 0 {
             segmentControl.selectedSegmentIndex = 0
             heaterImageView.image = UIImage(named: "DeviceHeaterOnIcon")
+            
         } else {
             segmentControl.selectedSegmentIndex = 1
             heaterImageView.image = UIImage(named: "DeviceHeaterOffIcon")
         }
         
         heaterImageView.styleImageView()
-        temperatureSlider.styleSlider()
-        modeTextView.styleTextView(texts: "Mode.Word".localized() + ": ")
-        temperatureTextView.styleTextView(texts: "Temperature.Word".localized() + ": ")
-        temperatureSlider.minimumValue = 7.0/100
-        temperatureSlider.maximumValue = 28.0/100
-        temperatureSlider.value =  Float(heaterControlPageViewModel.selectedDevice.temperature)/100
         
-        temperatureTextView.text = "Temperature.Word".localized() + ": " +  String(heaterControlPageViewModel.selectedDevice.temperature) + "°"
+        temperatureSlider.styleSlider()
+        
+        modeTextView.styleTextView(texts: "mode.Word".localized() + ": ")
+        
+        temperatureTextView.styleTextView(texts: "temperature.Word".localized() + ": ")
+        
+        temperatureSlider.minimumValue = 7.0/100
+        
+        temperatureSlider.maximumValue = 28.0/100
+        
+        temperatureSlider.value =  heaterControlPageViewModel.getDeviceTemperatureInFloat()/100
+        
+        temperatureTextView.text = "temperature.Word".localized() + ": " +  heaterControlPageViewModel.getDeviceTemperatureInString() + "°"
                 
     }
     
@@ -94,65 +100,84 @@ class HeaterControlPageViewController: UIViewController {
     
     private func addConstraintsForHeaterImageView() {
         
-        heaterImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        var constraints = [NSLayoutConstraint]()
         
-        heaterImageView.topAnchor.constraint(equalTo: view.topAnchor,constant: 160).isActive = true
+        constraints.append(heaterImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor))
         
-        heaterImageView.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        constraints.append(heaterImageView.topAnchor.constraint(equalTo: view.topAnchor,constant: 160))
         
-        heaterImageView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        constraints.append(heaterImageView.widthAnchor.constraint(equalToConstant: 100))
+        
+        constraints.append(heaterImageView.heightAnchor.constraint(equalToConstant: 100))
+         
+        NSLayoutConstraint.activate(constraints)
     }
     
     private func addConstraintsForTemperatureTextView() {
         
-        temperatureTextView.topAnchor.constraint(equalTo: heaterImageView.bottomAnchor,constant: 38).isActive = true
+        var constraints = [NSLayoutConstraint]()
         
-       temperatureTextView.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 30).isActive = true
+        constraints.append(temperatureTextView.topAnchor.constraint(equalTo: heaterImageView.bottomAnchor,constant: 38))
         
-        temperatureTextView.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -30).isActive = true
+        constraints.append(temperatureTextView.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 30))
         
+        constraints.append(temperatureTextView.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -30))
+        
+        NSLayoutConstraint.activate(constraints)
     }
     
     private func addConstraintsForTemperatureSlider() {
         
-        temperatureSlider.topAnchor.constraint(equalTo: temperatureTextView.bottomAnchor,constant: 16).isActive = true
+        var constraints = [NSLayoutConstraint]()
         
-        temperatureSlider.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 30).isActive = true
+        constraints.append(temperatureSlider.topAnchor.constraint(equalTo: temperatureTextView.bottomAnchor,constant: 16))
         
-        temperatureSlider.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -30).isActive = true
+        constraints.append(temperatureSlider.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 30))
+        
+        constraints.append(temperatureSlider.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -30))
+
+        NSLayoutConstraint.activate(constraints)
     }
     
     private func addConstraintsForModeTextView() {
         
-        modeTextView.topAnchor.constraint(equalTo: temperatureSlider.bottomAnchor, constant: 38).isActive = true
+        var constraints = [NSLayoutConstraint]()
         
-        modeTextView.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        constraints.append(modeTextView.topAnchor.constraint(equalTo: temperatureSlider.bottomAnchor, constant: 38))
         
-        modeTextView.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 30).isActive = true
+        constraints.append(modeTextView.heightAnchor.constraint(equalToConstant: 40))
         
-        modeTextView.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -30).isActive = true
+        constraints.append(modeTextView.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 30))
+        
+        constraints.append(modeTextView.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -30))
+        
+        NSLayoutConstraint.activate(constraints)
     }
     
     private func addConstraintsForSegmentControl() {
         
-        segmentControl.topAnchor.constraint(equalTo: modeTextView.bottomAnchor, constant: 16).isActive = true
+        var constraints = [NSLayoutConstraint]()
         
-        segmentControl.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        constraints.append(segmentControl.topAnchor.constraint(equalTo: modeTextView.bottomAnchor, constant: 16))
         
-        segmentControl.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 30).isActive = true
+        constraints.append(segmentControl.heightAnchor.constraint(equalToConstant: 40))
         
-        segmentControl.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -30).isActive = true
+        constraints.append(segmentControl.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 30))
+        
+        constraints.append(segmentControl.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -30))
+        
+        NSLayoutConstraint.activate(constraints)
     }
     
     @objc func segmentControlChange(_segmentControl: UISegmentedControl) {
         switch segmentControl.selectedSegmentIndex {
         case 0:
             heaterImageView.image = UIImage(named: "DeviceHeaterOnIcon")
-            heaterControlPageViewModel.updateMode(with: "On.Word".localized())
+            heaterControlPageViewModel.updateMode(with: "on.Word".localized())
             
         case 1:
             heaterImageView.image = UIImage(named: "DeviceHeaterOffIcon")
-            heaterControlPageViewModel.updateMode(with: "Off.Word".localized())
+            heaterControlPageViewModel.updateMode(with: "off.Word".localized())
             
         default:
             heaterImageView.image = UIImage(named: "DeviceHeaterOffIcon")
@@ -161,11 +186,9 @@ class HeaterControlPageViewController: UIViewController {
     
     @objc func sliderValueChanged(_slider: UISlider) {
         
-        temperatureTextView.text = "Temperature.Word".localized() + ": " + String(round(_slider.value * 100 * 2)/2) + "°"
+        temperatureTextView.text = "temperature.Word".localized() + ": " + String(round(_slider.value * 100 * 2)/2) + "°"
         
         heaterControlPageViewModel.updateTemperature(with: Float(round(_slider.value * 100 * 2)/2))
     }
     
-   
-
 }

@@ -5,17 +5,17 @@
   Created by Sergey Bohachenko on 26.07.2022.
   
 */
-"HomePage.Title" = "Ваші девайси";
-"Temperature.Word" = "Температура";
-"Intensity.Word" = "Яскравість";
-"Position.Word" = "Позиція";
-"On.Word" = "Включений";
-"Off.Word" = "Виключений";
-"Mode.Word" = "Режим";
-"Open.Word" = "Відкритий";
-"OpenAt.Word" = "Відкритий на";
-"Closed.Word" = "Зачинений";
-"ClosedOn.Word" = "Закритий на";
+"homePage.Title" = "Ваші девайси";
+"temperature.Word" = "Температура";
+"intensity.Word" = "Яскравість";
+"position.Word" = "Позиція";
+"on.Word" = "Включений";
+"off.Word" = "Виключений";
+"mode.Word" = "Режим";
+"open.Word" = "Відкритий";
+"openAt.Word" = "Відкритий на";
+"closed.Word" = "Зачинений";
+"closedOn.Word" = "Закритий на";
 "Lampe - Cuisine" = "Лампа - кухня";
 "Volet roulant - Salon" = "Ролети - Вітальня";
 "Radiateur - Chambre" = "Радіатор - Спальня";

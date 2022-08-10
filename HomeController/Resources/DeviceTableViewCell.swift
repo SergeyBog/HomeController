@@ -49,32 +49,32 @@ class DeviceTableViewCell: UITableViewCell {
             
             deviceNameLabel.text = model.deviceName.localized()
             
-            if model.mode == "ClosedOn.Word".localized() || model.position ?? 0 > 0 &&  model.position ?? 0 < 100 {
-                deviceFirstActivityLabel.text = "ClosedOn.Word".localized() + ": " + String(model.position ?? 0) + "%"
+            if model.mode == "closedOn.Word".localized() || model.position ?? 0 > 0 &&  model.position ?? 0 < 100 {
+                deviceFirstActivityLabel.text = "closedOn.Word".localized() + ": " + String(model.position ?? 0) + "%"
                 
-            } else if model.mode == "Open.Word".localized() || model.position ?? 0 == 0 {
-                deviceFirstActivityLabel.text = "Open.Word".localized()
+            } else if model.mode == "open.Word".localized() || model.position ?? 0 == 0 {
+                deviceFirstActivityLabel.text = "open.Word".localized()
                 
-            } else if model.mode == "Closed.Word".localized() || model.position == 100 {
-                deviceFirstActivityLabel.text = "Closed.Word".localized()
+            } else if model.mode == "closed.Word".localized() || model.position == 100 {
+                deviceFirstActivityLabel.text = "closed.Word".localized()
             }
             
         } else if model.productType == "Light" {
             
             deviceNameLabel.text = model.deviceName.localized()
             
-            if model.mode == "Off.Word".localized() || model.mode == "OFF" {
-                deviceFirstActivityLabel.text = "Off.Word".localized()
+            if model.mode == "off.Word".localized() || model.mode == "OFF" {
+                deviceFirstActivityLabel.text = "off.Word".localized()
             } else {
-                deviceFirstActivityLabel.text = "Intensity.Word".localized() + ": " + String(model.intensity ?? 0)
+                deviceFirstActivityLabel.text = "intensity.Word".localized() + ": " + String(model.intensity ?? 0)
             }
             
         } else {
             deviceNameLabel.text = model.deviceName.localized()
-            if model.mode == "Off.Word".localized() || model.mode == "OFF" {
-                deviceFirstActivityLabel.text = "Off.Word".localized()
+            if model.mode == "off.Word".localized() || model.mode == "OFF" {
+                deviceFirstActivityLabel.text = "off.Word".localized()
             } else {
-                deviceFirstActivityLabel.text = "Temperature.Word".localized() + ": " + String(model.temperature ?? 0) + "°"
+                deviceFirstActivityLabel.text = "temperature.Word".localized() + ": " + String(model.temperature ?? 0) + "°"
             }
         
         }

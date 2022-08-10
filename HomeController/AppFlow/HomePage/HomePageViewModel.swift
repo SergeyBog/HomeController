@@ -25,6 +25,14 @@ final class HomePageViewModel {
         }
     }
     
+    func getDevicesCount() -> Int {
+        return devices.count
+    }
+    
+    func getDevice(for index: Int) -> Device {
+        return devices[index]
+    }
+    
     func seeDetails(with device: Device) {
         coordinator?.seeDetails(with: device)
     }

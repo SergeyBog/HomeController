@@ -26,11 +26,13 @@ class HomePageTableViewController: UITableViewController {
     }
     
     private func SetupUI() {
-        tableView.register(DeviceTableViewCell.self, forCellReuseIdentifier:DeviceTableViewCell.identifier)
+        
+        tableView.register(DeviceTableViewCell.self, forCellReuseIdentifier: DeviceTableViewCell.identifier)
         configureViewModel()
         
         tableView.backgroundColor = .white
-        title = "HomePage.Title".localized()
+        
+        title = "homePage.Title".localized()
         
         homePageViewModel.getDevices()
     
@@ -45,25 +47,27 @@ class HomePageTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return homePageViewModel.devices.count
+        return homePageViewModel.getDevicesCount()
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    
-        let model = homePageViewModel.devices[indexPath.row]
+        
+        let model = homePageViewModel.getDevice(for: indexPath.row)
         
         let cell = tableView.dequeueReusableCell(withIdentifier: DeviceTableViewCell.identifier, for: indexPath) as! DeviceTableViewCell
+        
         cell.configure(with: model) 
         
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
-        let model = homePageViewModel.devices[indexPath.row]
+        
+        let model = homePageViewModel.getDevice(for: indexPath.row)
         
         tableView.deselectRow(at: indexPath, animated: true)
+        
         openDevice(model: model)
     }
     

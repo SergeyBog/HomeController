@@ -20,7 +20,7 @@ class LightControlPageViewController: UIViewController {
     private let modeTextView = UITextView()
     
     private let segmentControl: UISegmentedControl = {
-        let items = ["On.Word".localized(),"Off.Word".localized()]
+        let items = ["on.Word".localized(),"off.Word".localized()]
         let segControl = UISegmentedControl(items: items)
         segControl.translatesAutoresizingMaskIntoConstraints = false
         return segControl
@@ -55,29 +55,35 @@ class LightControlPageViewController: UIViewController {
     }
     
     private func stylizeElements() {
-        self.title = lightControlPageViewModel.selectedDevice.deviceName.localized()
+        
+        self.title = lightControlPageViewModel.getDeviceName()
+        
         view.backgroundColor = .lightGray
         
         segmentControl.addTarget(self, action: #selector(segmentControlChange(_segmentControl:)), for: .valueChanged)
         
         intensitySlider.addTarget(self, action: #selector(sliderValueChanged(_slider:)), for: .valueChanged)
         
-        if lightControlPageViewModel.selectedDevice.mode == "On.Word".localized() || lightControlPageViewModel.selectedDevice.mode == "ON" {
+        if lightControlPageViewModel.getDeviceMode() == 0 {
             segmentControl.selectedSegmentIndex = 0
             lightImageView.image = UIImage(named: "DeviceLightOnIcon")
+            
         } else {
             segmentControl.selectedSegmentIndex = 1
             lightImageView.image = UIImage(named: "DeviceLightOffIcon")
         }
         
         lightImageView.styleImageView()
+        
         intensitySlider.styleSlider()
-        modeTextView.styleTextView(texts: "Mode.Word".localized() + ": ")
-        intensityTextView.styleTextView(texts: "Intensity.Word".localized() + ": ")
         
-        intensitySlider.value =  Float(lightControlPageViewModel.selectedDevice.intensity)/100
+        modeTextView.styleTextView(texts: "mode.Word".localized() + ": ")
         
-        intensityTextView.text = "Intensity.Word".localized() + ": " + String(lightControlPageViewModel.selectedDevice.intensity)
+        intensityTextView.styleTextView(texts: "intensity.Word".localized() + ": ")
+        
+        intensitySlider.value =  lightControlPageViewModel.getDeviceIntensityInFloat()/100
+        
+        intensityTextView.text = "intensity.Word".localized() + ": " + lightControlPageViewModel.getDeviceIntensityInString()
                 
     }
     
@@ -91,65 +97,84 @@ class LightControlPageViewController: UIViewController {
     
     private func addConstraintsForLightImageView() {
         
-        lightImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        var constraints = [NSLayoutConstraint]()
         
-        lightImageView.topAnchor.constraint(equalTo: view.topAnchor,constant: 160).isActive = true
+        constraints.append(lightImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor))
         
-        lightImageView.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        constraints.append(lightImageView.topAnchor.constraint(equalTo: view.topAnchor,constant: 160))
         
-        lightImageView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        constraints.append( lightImageView.widthAnchor.constraint(equalToConstant: 100))
+        
+        constraints.append(lightImageView.heightAnchor.constraint(equalToConstant: 100))
+        
+        NSLayoutConstraint.activate(constraints)
     }
     
     private func addConstraintsForIntensityTextView() {
         
-        intensityTextView.topAnchor.constraint(equalTo: lightImageView.bottomAnchor,constant: 38).isActive = true
+        var constraints = [NSLayoutConstraint]()
         
-        intensityTextView.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 30).isActive = true
+        constraints.append( intensityTextView.topAnchor.constraint(equalTo: lightImageView.bottomAnchor,constant: 38))
         
-        intensityTextView.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -30).isActive = true
+        constraints.append(intensityTextView.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 30))
         
+        constraints.append(intensityTextView.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -30))
+       
+        NSLayoutConstraint.activate(constraints)
     }
     
    private func addConstraintsForIntensitySlider() {
+       
+        var constraints = [NSLayoutConstraint]()
         
-        intensitySlider.topAnchor.constraint(equalTo: intensityTextView.bottomAnchor,constant: 16).isActive = true
+        constraints.append(intensitySlider.topAnchor.constraint(equalTo: intensityTextView.bottomAnchor,constant: 16))
         
-        intensitySlider.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 30).isActive = true
+        constraints.append(intensitySlider.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 30))
         
-        intensitySlider.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -30).isActive = true
+        constraints.append(intensitySlider.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -30))
+       
+        NSLayoutConstraint.activate(constraints)
     }
     
     private func addConstraintsForModeTextView() {
         
-        modeTextView.topAnchor.constraint(equalTo: intensitySlider.bottomAnchor, constant: 38).isActive = true
+        var constraints = [NSLayoutConstraint]()
         
-        modeTextView.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        constraints.append(modeTextView.topAnchor.constraint(equalTo: intensitySlider.bottomAnchor, constant: 38))
         
-        modeTextView.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 30).isActive = true
+        constraints.append(modeTextView.heightAnchor.constraint(equalToConstant: 40))
         
-        modeTextView.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -30).isActive = true
+        constraints.append(modeTextView.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 30))
+        
+        constraints.append(modeTextView.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -30))
+        
+        NSLayoutConstraint.activate(constraints)
     }
     
     private func addConstraintsForSegmentControl() {
         
-        segmentControl.topAnchor.constraint(equalTo: modeTextView.bottomAnchor, constant: 16).isActive = true
+        var constraints = [NSLayoutConstraint]()
         
-        segmentControl.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        constraints.append(segmentControl.topAnchor.constraint(equalTo: modeTextView.bottomAnchor, constant: 16))
         
-        segmentControl.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 30).isActive = true
+        constraints.append(segmentControl.heightAnchor.constraint(equalToConstant: 40))
         
-        segmentControl.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -30).isActive = true
+        constraints.append(segmentControl.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 30))
+        
+        constraints.append(segmentControl.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -30))
+    
+        NSLayoutConstraint.activate(constraints)
     }
     
     @objc func segmentControlChange(_segmentControl: UISegmentedControl) {
         switch segmentControl.selectedSegmentIndex {
         case 0:
             lightImageView.image = UIImage(named: "DeviceLightOnIcon")
-            lightControlPageViewModel.updateMode(with: "On.Word".localized())
+            lightControlPageViewModel.updateMode(with: "on.Word".localized())
             
         case 1:
             lightImageView.image = UIImage(named: "DeviceLightOffIcon")
-            lightControlPageViewModel.updateMode(with: "Off.Word".localized())
+            lightControlPageViewModel.updateMode(with: "off.Word".localized())
             
         default:
             lightImageView.image = UIImage(named: "DeviceLightOffIcon")
@@ -157,7 +182,7 @@ class LightControlPageViewController: UIViewController {
     }
     
     @objc func sliderValueChanged(_slider: UISlider) {
-        intensityTextView.text = "Intensity.Word".localized() + ": " + String(Int((_slider.value * 100).rounded(.up)))
+        intensityTextView.text = "intensity.Word".localized() + ": " + String(Int((_slider.value * 100).rounded(.up)))
         
         lightControlPageViewModel.updateIntensity(with: Int((_slider.value * 100).rounded(.up)))
     }

@@ -5,17 +5,17 @@
   Created by Sergey Bohachenko on 26.07.2022.
   
 */
-"HomePage.Title" = "Vos appareils";
-"Temperature.Word" = "Température";
-"Intensity.Word" = "Intensité";
-"Position.Word" = "Position";
-"On.Word" = "On";
-"Off.Word" = "Off";
-"Mode.Mot" = "Mode";
-"Ouvrir.Mot" = "Ouvrir";
-"OpenAt.Word" = "Ouvert à";
-"Closed.Word" = "Fermé";
-"ClosedOn.Word" = "Fermé le";
+"homePage.Title" = "Vos appareils";
+"temperature.Word" = "Température";
+"intensity.Word" = "Intensité";
+"position.Word" = "Position";
+"on.Word" = "On";
+"off.Word" = "Off";
+"mode.Word" = "Mode";
+"open.Word" = "Ouvrir";
+"openAt.Word" = "Ouvert à";
+"closed.Word" = "Fermé";
+"closedOn.Word" = "Fermé le";
 "Lampe - Cuisine" = "Lampe - Cuisine";
 "Volet roulant - Salon" = "Volet roulant - Salon";
 "Radiateur - Chambre" = "Radiateur - Chambre";

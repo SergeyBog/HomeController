@@ -43,18 +43,21 @@ class RollerShutterControlPageViewController: UIViewController {
     }
     
     private func stylizeElements() {
-        self.title = rollerShutterControlPageViewModel.selectedDevice.deviceName.localized()
+        self.title = rollerShutterControlPageViewModel.getDeviceName()
+        
         view.backgroundColor = .lightGray
         
         positionSlider.addTarget(self, action: #selector(sliderValueChanged(_slider:)), for: .valueChanged)
         
         rollerShutterImageView.styleImageViewWithImage(imageName: "DeviceRollerShutterIcon")
+        
         positionSlider.styleSlider()
-        positionTextView.styleTextView(texts: "Position.Word".localized() + ": ")
         
-        positionSlider.value =  Float(rollerShutterControlPageViewModel.selectedDevice.position)/100
+        positionTextView.styleTextView(texts: "position.Word".localized() + ": ")
         
-        positionTextView.text = "Position.Word".localized() + ": " + String(Int( rollerShutterControlPageViewModel.selectedDevice.position))
+        positionSlider.value =  rollerShutterControlPageViewModel.getDevicePositionInFloat()/100
+        
+        positionTextView.text = "position.Word".localized() + ": " + rollerShutterControlPageViewModel.getDevicePositionInString()
                 
     }
     
@@ -62,42 +65,55 @@ class RollerShutterControlPageViewController: UIViewController {
         addConstraintsForRollerShutterImageView()
         addConstraintsForPositionTextView()
         addConstraintsForPositionSlider()
-      
     }
     
     private func addConstraintsForRollerShutterImageView() {
         
-        rollerShutterImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        var constraints = [NSLayoutConstraint]()
         
-        rollerShutterImageView.topAnchor.constraint(equalTo: view.topAnchor,constant: 160).isActive = true
+        constraints.append(rollerShutterImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor))
         
-        rollerShutterImageView.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        constraints.append(rollerShutterImageView.topAnchor.constraint(equalTo: view.topAnchor,constant: 160))
         
-        rollerShutterImageView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        constraints.append(rollerShutterImageView.widthAnchor.constraint(equalToConstant: 100))
+        
+        constraints.append(rollerShutterImageView.heightAnchor.constraint(equalToConstant: 100))
+        
+        NSLayoutConstraint.activate(constraints)
     }
     
     private func addConstraintsForPositionTextView() {
         
-        positionTextView.topAnchor.constraint(equalTo: rollerShutterImageView.bottomAnchor,constant: 38).isActive = true
+        var constraints = [NSLayoutConstraint]()
         
-        positionTextView.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 30).isActive = true
+        constraints.append(positionTextView.topAnchor.constraint(equalTo: rollerShutterImageView.bottomAnchor,constant: 38))
         
-        positionTextView.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -30).isActive = true
+        constraints.append(positionTextView.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 30))
+        
+        constraints.append(positionTextView.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -30))
+        
+        NSLayoutConstraint.activate(constraints)
         
     }
     
     private func addConstraintsForPositionSlider() {
         
-        positionSlider.topAnchor.constraint(equalTo: positionTextView.bottomAnchor,constant: 16).isActive = true
+        var constraints = [NSLayoutConstraint]()
         
-        positionSlider.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 30).isActive = true
+        constraints.append(positionSlider.topAnchor.constraint(equalTo: positionTextView.bottomAnchor,constant: 16))
         
-        positionSlider.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -30).isActive = true
+        constraints.append(positionSlider.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 30))
+        
+        constraints.append(positionSlider.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -30))
+        
+        NSLayoutConstraint.activate(constraints)
     }
     
     
     @objc func sliderValueChanged(_slider: UISlider) {
-        positionTextView.text = "Position.Word".localized() + ": " + String(Int( (_slider.value * 100).rounded(.up)))
+        
+        positionTextView.text = "position.Word".localized() + ": " + String(Int( (_slider.value * 100).rounded(.up)))
+        
         let value = (_slider.value * 100).rounded(.up)
         
         rollerShutterControlPageViewModel.updateData(with: value)
