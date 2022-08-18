@@ -11,9 +11,10 @@ final class HeaterControlPageViewModel {
     
     var selectedDevice: Heater
     var coordinator: HeaterControlPageCoordinator?
+    let databaseManager = DatabaseManager()
 
-    init(with device: Heater) {
-        self.selectedDevice = device
+    init(with deviceId: Int) {
+        self.selectedDevice = databaseManager.getHeaterDevice(with: deviceId)
     }
     
     func getDeviceName() -> String {
@@ -33,11 +34,11 @@ final class HeaterControlPageViewModel {
     }
     
     func getDeviceTemperatureInFloat() -> Float {
-        return Float(selectedDevice.temperature)
+        return Float(selectedDevice.temperature)/100
     }
     
     func getDeviceTemperatureInString() -> String {
-        return String(selectedDevice.temperature)
+        return "temperature.Word".localized() + ": " +  String(selectedDevice.temperature) + "°"
     }
     
     func updateInfo() {
@@ -49,13 +50,17 @@ final class HeaterControlPageViewModel {
         updateDevice()
     }
     
-    func updateTemperature(with value: Float) {
+    private func updateTemperature(with value: Float) {
         selectedDevice.temperature = value
         updateDevice()
     }
     
     func updateDevice() {
-        let databaseManager = DatabaseManager()
         databaseManager.updateHeaterDevice(deviceToUpdate: selectedDevice)
+    }
+    
+    func temperatureValueChanged(sliderValue: Float) -> String {
+        updateTemperature(with: round(sliderValue * 100 * 2)/2)
+        return "temperature.Word".localized() + ": " + String(round(sliderValue * 100 * 2)/2) + "°"
     }
 }

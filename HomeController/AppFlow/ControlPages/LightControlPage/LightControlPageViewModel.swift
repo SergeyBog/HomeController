@@ -11,9 +11,10 @@ final class LightControlPageViewModel {
     
     var selectedDevice: Light
     var coordinator: LightControlPageCoordinator?
+    let databaseManager = DatabaseManager()
     
-    init(with device: Light) {
-        self.selectedDevice = device
+    init(with deviceId: Int) {
+        self.selectedDevice = databaseManager.getLightDevice(with: deviceId)
     }
     
     func getDeviceName() -> String {
@@ -33,11 +34,11 @@ final class LightControlPageViewModel {
     }
     
     func getDeviceIntensityInFloat() -> Float {
-        return Float(selectedDevice.intensity)
+        return Float(selectedDevice.intensity)/100
     }
     
     func getDeviceIntensityInString() -> String {
-        return String(selectedDevice.intensity)
+        return "intensity.Word".localized() + ": " + String(selectedDevice.intensity)
     }
     
     func updateInfo() {
@@ -49,14 +50,19 @@ final class LightControlPageViewModel {
         updateDevice()
     }
     
-    func updateIntensity(with value: Int) {
+    private func updateIntensity(with value: Int) {
         selectedDevice.intensity = value
         updateDevice()
     }
     
     func updateDevice() {
-        let databaseManager = DatabaseManager()
         databaseManager.updateLightDevice(deviceToUpdate: selectedDevice)
+    }
+    
+    func intentsityValueChanged(sliderValue: Float) -> String {
+        let value = Int((sliderValue * 100).rounded(.up))
+        updateIntensity(with: value)
+        return "intensity.Word".localized() + ": " + String(value)
     }
 }
 

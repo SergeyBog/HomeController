@@ -14,6 +14,9 @@
 		B1332B402897E74A00C2D57A /* LightDbModel+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1332B3A2897E74A00C2D57A /* LightDbModel+CoreDataProperties.swift */; };
 		B1332B412897E74A00C2D57A /* HeaterDbModel+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1332B3B2897E74A00C2D57A /* HeaterDbModel+CoreDataClass.swift */; };
 		B1332B422897E74A00C2D57A /* HeaterDbModel+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1332B3C2897E74A00C2D57A /* HeaterDbModel+CoreDataProperties.swift */; };
+		B1380B4028AD8575004D825F /* RollerShutterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1380B3F28AD8575004D825F /* RollerShutterView.swift */; };
+		B1731AAC28AE5FF300D70E2E /* HeaterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1731AAB28AE5FF300D70E2E /* HeaterView.swift */; };
+		B1731AAE28AE675F00D70E2E /* LightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1731AAD28AE675F00D70E2E /* LightView.swift */; };
 		B18B2E1028897ECC0030F947 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18B2E0F28897ECC0030F947 /* AppDelegate.swift */; };
 		B18B2E1228897ECC0030F947 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18B2E1128897ECC0030F947 /* SceneDelegate.swift */; };
 		B18B2E1928897ECE0030F947 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B18B2E1828897ECE0030F947 /* Assets.xcassets */; };
@@ -52,6 +55,9 @@
 		B1332B3A2897E74A00C2D57A /* LightDbModel+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LightDbModel+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B1332B3B2897E74A00C2D57A /* HeaterDbModel+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HeaterDbModel+CoreDataClass.swift"; sourceTree = "<group>"; };
 		B1332B3C2897E74A00C2D57A /* HeaterDbModel+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HeaterDbModel+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		B1380B3F28AD8575004D825F /* RollerShutterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RollerShutterView.swift; sourceTree = "<group>"; };
+		B1731AAB28AE5FF300D70E2E /* HeaterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaterView.swift; sourceTree = "<group>"; };
+		B1731AAD28AE675F00D70E2E /* LightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightView.swift; sourceTree = "<group>"; };
 		B18B2E0C28897ECC0030F947 /* HomeController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HomeController.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B18B2E0F28897ECC0030F947 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B18B2E1128897ECC0030F947 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -230,6 +236,7 @@
 				B18B2E352889EB2C0030F947 /* LightControlPageCoordinator.swift */,
 				B18B2E372889EB420030F947 /* LightControlPageViewModel.swift */,
 				B18B2E392889EB5D0030F947 /* LightControlPageViewController.swift */,
+				B1731AAD28AE675F00D70E2E /* LightView.swift */,
 			);
 			path = LightControlPage;
 			sourceTree = "<group>";
@@ -250,6 +257,7 @@
 				B18B2E42288AA4A70030F947 /* HeaterControlPageCoordinator.swift */,
 				B18B2E44288AA4CC0030F947 /* HeaterControlPageViewModel.swift */,
 				B18B2E46288AA4EE0030F947 /* HeaterControlPageViewController.swift */,
+				B1731AAB28AE5FF300D70E2E /* HeaterView.swift */,
 			);
 			path = HeaterControlPage;
 			sourceTree = "<group>";
@@ -260,6 +268,7 @@
 				B18B2E48288AA5460030F947 /* RollerShutterControlPageCoordinator.swift */,
 				B18B2E4A288AA55E0030F947 /* RollerShutterControlPageViewModel.swift */,
 				B18B2E4C288AA5790030F947 /* RollerShutterControlPageViewController.swift */,
+				B1380B3F28AD8575004D825F /* RollerShutterView.swift */,
 			);
 			path = RollerShutterControlPage;
 			sourceTree = "<group>";
@@ -378,6 +387,7 @@
 				B18B2E84288EBF020030F947 /* DatabaseManager.swift in Sources */,
 				B1332B3E2897E74A00C2D57A /* RollershutterDbModel+CoreDataProperties.swift in Sources */,
 				B18B2E2E2889EAA70030F947 /* HomePageCoordinator.swift in Sources */,
+				B1380B4028AD8575004D825F /* RollerShutterView.swift in Sources */,
 				B18B2E322889EAD40030F947 /* HomePageTableViewController.swift in Sources */,
 				B1332B422897E74A00C2D57A /* HeaterDbModel+CoreDataProperties.swift in Sources */,
 				B18B2E382889EB420030F947 /* LightControlPageViewModel.swift in Sources */,
@@ -392,9 +402,11 @@
 				B18B2E1028897ECC0030F947 /* AppDelegate.swift in Sources */,
 				B18B2E54288B413A0030F947 /* UIImageView.swift in Sources */,
 				B1332B3D2897E74A00C2D57A /* RollershutterDbModel+CoreDataClass.swift in Sources */,
+				B1731AAE28AE675F00D70E2E /* LightView.swift in Sources */,
 				B1332B162895546600C2D57A /* DeviceManager.swift in Sources */,
 				B18B2E50288B0B150030F947 /* UISlider.swift in Sources */,
 				B1332B412897E74A00C2D57A /* HeaterDbModel+CoreDataClass.swift in Sources */,
+				B1731AAC28AE5FF300D70E2E /* HeaterView.swift in Sources */,
 				B18B2E43288AA4A70030F947 /* HeaterControlPageCoordinator.swift in Sources */,
 				B18B2E27288980210030F947 /* MainCoordinator.swift in Sources */,
 				B18B2E80288DDD340030F947 /* UILabel.swift in Sources */,

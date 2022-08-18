@@ -10,7 +10,7 @@ import Foundation
 final class HomePageViewModel {
     
     var coordinator: HomePageCoordinator?
-    var devices = [Device]()
+    private var devices = [Device]()
     var reloadTableView: (() -> ())?
   
     func getDevices() {

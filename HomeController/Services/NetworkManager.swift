@@ -19,6 +19,7 @@ class NetworkManager {
         
         URLSession.shared.dataTask(with: url) { data, resonse, error in
             if error != nil {
+                completion(nil, error)
                 return
             }
             

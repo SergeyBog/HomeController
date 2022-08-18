@@ -23,8 +23,7 @@ final class HeaterControlPageCoordinator {
     }
     
     func start(with deviceId: Int) {
-        let databaseManager = DatabaseManager()
-        let heaterControlPageViewModel = HeaterControlPageViewModel(with: databaseManager.getHeaterDevice(with: deviceId))
+        let heaterControlPageViewModel = HeaterControlPageViewModel(with: deviceId)
         heaterControlPageViewModel.coordinator = self
         let heaterControlPageViewController = HeaterControlPageViewController(with: heaterControlPageViewModel)
         navigationController.pushViewController(heaterControlPageViewController, animated: true)

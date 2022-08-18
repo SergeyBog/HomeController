@@ -23,12 +23,8 @@ final class RollerShutterControlPageCoordinator {
     }
     
     func start(with deviceId: Int) {
-
-        let databaseManager = DatabaseManager()
-        let rollerShutterControlPageViewModel = RollerShutterControlPageViewModel(with: databaseManager.getRollershutterDevice(with: deviceId))
-        
+        let rollerShutterControlPageViewModel = RollerShutterControlPageViewModel(with: deviceId)
         rollerShutterControlPageViewModel.coordinator = self
-        
         let rollerShutterControlPageViewController = RollerShutterControlPageViewController(with: rollerShutterControlPageViewModel)
         navigationController.pushViewController(rollerShutterControlPageViewController, animated: true)
     }

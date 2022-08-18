@@ -11,9 +11,12 @@ final class RollerShutterControlPageViewModel {
     
     var selectedDevice: RollerShutter
     var coordinator: RollerShutterControlPageCoordinator?
+    let databaseManager = DatabaseManager()
     
-    init(with device: RollerShutter) {
-        self.selectedDevice = device
+    var sliderValueChange: (() -> ())?
+    
+    init(with deviceId: Int) {
+        self.selectedDevice = databaseManager.getRollershutterDevice(with: deviceId)
     }
     
     func getDeviceName() -> String {
@@ -21,11 +24,11 @@ final class RollerShutterControlPageViewModel {
     }
     
     func getDevicePositionInFloat() -> Float {
-        return Float(selectedDevice.position)
+        return Float(selectedDevice.position)/100
     }
     
     func getDevicePositionInString() -> String {
-        return String(selectedDevice.position)
+        return "position.Word".localized() + ": " + String(selectedDevice.position) 
     }
     
     func updateInfo() {
@@ -52,8 +55,14 @@ final class RollerShutterControlPageViewModel {
     }
     
     func updateDevice() {
-        let databaseManager = DatabaseManager()
         databaseManager.updateRollershutterDevice(deviceToUpdate: selectedDevice)
+    }
+    
+    func positionValueChanged(sliderValue: Float) -> String {
+        
+        let value = (sliderValue * 100).rounded(.up)
+        updateData(with: value)
+        return "position.Word".localized() + ": " + String(Int(value))
     }
     
 }

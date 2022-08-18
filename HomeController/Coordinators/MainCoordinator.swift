@@ -47,8 +47,7 @@ final class MainCoordinator {
     
         rollerShutterControlPageCoordinator.start(with: deviceId)
     }
-    
-   
+
 }
 
 extension MainCoordinator: HomePageCoordinatorTransitions, LightControlPageCoordinatorTransitions, HeaterControlPageCoordinatorTransitions, RollerShutterControlPageCoordinatorTransitions {
